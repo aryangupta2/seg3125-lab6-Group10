@@ -14,9 +14,9 @@ https://github.com/SEG3125-2026/lab-1-group-10
 
 # Each member contribution:
 
-- Aryan:
-- Raman:
-- Vinusha:
+- Aryan: CSS
+- Raman: HTML Structure
+- Vinusha: Deployment, CSS
 
 Link to the website:
 
