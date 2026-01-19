@@ -17,6 +17,7 @@ https://github.com/SEG3125-2026/lab-1-group-10
 - Aryan:
 - Raman:
 - Vinusha:
-  Link to the website:
+
+Link to the website:
 
 Snapshots of the website created:
