@@ -1,83 +1,186 @@
-<! This little bit of code started with https://www.wikihow.com/Create-a-Questionnaire-in-HTML and got modified, by then using info from w3schools.com to continue.
-
-This is an UGLY survey....  PLEASE MODIFY IT!
-
-Caroline Barrière
-May 2020
-
->
-
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <! IMPORTANT to use a CSS file - external >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles/style.css" rel="stylesheet" type="text/css" />
-    <title>Questionnaire</title>
+    <title>Walmart UI Evaluation</title>
   </head>
 
   <body>
-    <h1>Survey</h1>
-    <form id="myform" action="index.php">
-      <br />
-      <br />
-      <! Choose a website to evaluate >
-      <h3><i>This is a terribly ugly page... please modify it!</i></h3>
-      <h2>
-        What do you think of the UI in this
-        <a href="http://Provigo.ca">Provigo</a> site?
-      </h2>
-      <br />
-      <br />
-      <! You should make your image clickable>
-      <img
-        src="images/Provigo-FrontPage.JPG"
-        alt="http://Provigo.ca"
-        width="450"
-        height="300"
-      />
-      <br />
-      <br />
-      <div class="question">
-        <h2>Personal Information</h2>
-        <p>First name: <input type="text" name="firstname" /></p>
-        <p>Last name: <input type="text" name="lastname" /></p>
-        <br />
-        <br />
-      </div>
+    <div class="container">
+      <header>
+        <h1>Walmart Website UI Evaluation</h1>
+        <p class="subtitle">
+          Help us evaluate the user interface of
+          <a href="https://www.walmart.ca" target="_blank">Walmart Canada</a>
+        </p>
+      </header>
 
-      <div class="question">
-        <h2>What you like</h2>
-        I like:<br />
-        <input type="checkbox" name="Color" value="Red" />Red<br />
-        <input type="checkbox" name="Color" value="Green" />Green<br />
-        <input type="checkbox" name="Color" value="Blue" />Blue<br />
+      <main>
+        <div class="image-section">
+          <a href="https://www.walmart.ca" target="_blank">
+            <img
+              src="images/walmart-screenshot.png"
+              alt="Walmart Canada Website Screenshot"
+              class="website-screenshot"
+            />
+          </a>
+          <p class="image-caption">Click the image to visit Walmart.ca</p>
+        </div>
 
-        <br />
+        <form id="evaluation-form" action="index.php" method="post">
+          <!-- Text Question -->
+          <div class="question">
+            <h2>1. Personal Information</h2>
+            <label for="fullname">Full Name:</label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
 
-        What is your favorite fruit?<br />
-        <select id="favorite">
-          <option value="Apples" selected="selected">Apples</option>
-          <option value="Oranges">Oranges</option>
-          <option value="Bananas">Bananas</option>
-        </select>
-      </div>
+          <!-- Radio Button Single Choice -->
+          <div class="question">
+            <h2>2. Overall Experience</h2>
+            <p>How would you rate your overall experience with the Walmart website?</p>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="experience" value="excellent" required />
+                <span>Excellent</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="experience" value="good" />
+                <span>Good</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="experience" value="average" />
+                <span>Average</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="experience" value="poor" />
+                <span>Poor</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="experience" value="very-poor" />
+                <span>Very Poor</span>
+              </label>
+            </div>
+          </div>
 
-      <br />
-      <br />
+          <!-- Dropdown List Single Choice -->
+          <div class="question">
+            <h2>3. Navigation Ease</h2>
+            <label for="navigation">How easy was it to navigate the website?</label>
+            <select id="navigation" name="navigation" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="very-easy">Very Easy</option>
+              <option value="easy">Easy</option>
+              <option value="neutral">Neutral</option>
+              <option value="difficult">Difficult</option>
+              <option value="very-difficult">Very Difficult</option>
+            </select>
+          </div>
 
-      Comments:<br />
-      <textarea rows="5" cols="30"></textarea>
+          <!-- Checkbox Multiple Selection -->
+          <div class="question">
+            <h2>4. Website Features</h2>
+            <p>Which features of the website did you find most useful? (Select all that apply)</p>
+            <div class="checkbox-group">
+              <label class="checkbox-option">
+                <input type="checkbox" name="features" value="search" />
+                <span>Search Functionality</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="features" value="categories" />
+                <span>Product Categories</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="features" value="filters" />
+                <span>Filtering Options</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="features" value="cart" />
+                <span>Shopping Cart</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="features" value="reviews" />
+                <span>Customer Reviews</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="features" value="deals" />
+                <span>Deals and Promotions</span>
+              </label>
+            </div>
+          </div>
 
-      <br />
-      <br />
+          <!-- Additional Radio Question -->
+          <div class="question">
+            <h2>5. Visual Design</h2>
+            <p>How would you rate the visual design and layout of the website?</p>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="design" value="very-appealing" required />
+                <span>Very Appealing</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="design" value="appealing" />
+                <span>Appealing</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="design" value="neutral" />
+                <span>Neutral</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="design" value="unappealing" />
+                <span>Unappealing</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="design" value="very-unappealing" />
+                <span>Very Unappealing</span>
+              </label>
+            </div>
+          </div>
 
-      <button id="submitButton" type="button" class="block">
-        SUBMIT your questionnaire
-      </button>
+          <!-- Additional Dropdown Question -->
+          <div class="question">
+            <h2>6. Recommendation</h2>
+            <label for="recommend">Would you recommend this website to others?</label>
+            <select id="recommend" name="recommend" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="definitely">Definitely Yes</option>
+              <option value="probably">Probably Yes</option>
+              <option value="not-sure">Not Sure</option>
+              <option value="probably-not">Probably Not</option>
+              <option value="definitely-not">Definitely Not</option>
+            </select>
+          </div>
 
-      <p id="signature">Site created by Caroline Barrière</p>
-    </form>
+          <!-- Comments Section -->
+          <div class="question">
+            <h2>7. Additional Comments</h2>
+            <label for="comments">Please share any additional feedback or suggestions:</label>
+            <textarea
+              id="comments"
+              name="comments"
+              rows="5"
+              placeholder="Enter your comments here..."
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="submit-section">
+            <button type="submit" class="submit-button">Submit Questionnaire</button>
+          </div>
+        </form>
+      </main>
+
+      <footer>
+        <p id="signature">Website designed by Aryan Gupta, Vinusha Uthayakumar, Raman Gupta</p>
+      </footer>
+    </div>
   </body>
 </html>
-
