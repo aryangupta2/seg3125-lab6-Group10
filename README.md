@@ -1,1 +1,22 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/JFcv-Bpw)
+# Lab 1 Submission
+
+Group Number: 25
+
+# Group Members
+
+- Aryan Gupta
+- Vinusha Uthayakumar
+- Raman Gupta
+
+# Link to the GitHub repository:
+
+https://github.com/SEG3125-2026/lab-1-group-10
+
+# Each member contribution:
+
+- Aryan:
+- Raman:
+- Vinusha:
+  Link to the website:
+
+Snapshots of the website created:
