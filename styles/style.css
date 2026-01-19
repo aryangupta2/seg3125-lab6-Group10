@@ -1,0 +1,183 @@
+/* ---------- Global Reset ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+/* ---------- Page Background ---------- */
+body {
+  background-color: #f4f6f8;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ---------- Container ---------- */
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Header ---------- */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: #0071ce;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #555;
+}
+
+.subtitle a {
+  color: #0071ce;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.subtitle a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Image Section ---------- */
+.image-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.website-screenshot {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.website-screenshot:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.image-caption {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* ---------- Questions ---------- */
+.question {
+  margin-bottom: 30px;
+}
+
+.question h2 {
+  font-size: 1.2rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.question p,
+.question label {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ---------- Inputs & Textarea ---------- */
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #0071ce;
+  box-shadow: 0 0 0 2px rgba(0, 113, 206, 0.15);
+}
+
+/* ---------- Radio & Checkbox Groups ---------- */
+.radio-group,
+.checkbox-group {
+  margin-top: 10px;
+}
+
+.radio-option,
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.radio-option input,
+.checkbox-option input {
+  margin-right: 10px;
+  accent-color: #0071ce;
+}
+
+/* ---------- Submit Button ---------- */
+.submit-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.submit-button {
+  background-color: #0071ce;
+  color: #ffffff;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #005bb5;
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+#signature {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 15px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+}
