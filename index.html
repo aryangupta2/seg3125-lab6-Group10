@@ -18,19 +18,58 @@
       </header>
 
       <main>
+        <!-- An image of the homepage that also serves as a link to the website -->
         <div class="image-section">
           <a href="https://www.walmart.ca" target="_blank">
             <img
-              src="images/walmart-screenshot.png"
+              src="images/walmart_home_page.png"
               alt="Walmart Canada Website Screenshot"
               class="website-screenshot"
             />
           </a>
           <p class="image-caption">Click the image to visit Walmart.ca</p>
+          <!--  A photo gallery to show multiple pages of the Walmart site -->
+          <div class="gallery">
+            <a href="#zoom-1">
+              <img src="images/Walmart_Home_Page.png" alt="Homepage" />
+            </a>
+            <a href="#zoom-2">
+              <img src="images/Grocery_Page.png" alt="Grocery Page" />
+            </a>
+            <a href="#zoom-3">
+              <img src="images/Item_Page.png" alt="Item Page" />
+            </a>
+            <a href="#zoom-4">
+              <img src="images/Cart_Page.png" alt="Cart Page" />
+            </a>
+          </div>
+          <p class="image-caption">Click the images to zoom in</p>
         </div>
 
-        <form id="evaluation-form" action="index.php" method="post">
-          <!-- Text Question -->
+        <div id="zoom-1" class="zoom-overlay">
+          <a href="#" class="close">&times;</a>
+            <img src="images/Walmart_Home_Page.png" alt="Zoomed Homepage" />
+          </a>
+        </div>
+
+        <div id="zoom-2" class="zoom-overlay">
+          <a href="#" class="close">&times;</a>
+          <img src="images/Grocery_Page.png" alt="Zoomed Grocery Page" />
+        </div>
+
+        <div id="zoom-3" class="zoom-overlay">
+          <a href="#" class="close">&times;</a>
+          <img src="images/Item_Page.png" alt="Zoomed Item Page" />
+        </div>
+
+        <div id="zoom-4" class="zoom-overlay">
+          <a href="#" class="close">&times;</a>
+          <img src="images/Cart_Page.png" alt="Zoomed Cart Page" />
+        </div>
+
+        <!-- A form containing at least 6 questions -->
+        <form id="evaluation-form">
+          <!-- Text-type question -->
           <div class="question">
             <h2>1. Personal Information</h2>
             <label for="fullname">Full Name:</label>
@@ -46,10 +85,18 @@
           <!-- Radio Button Single Choice -->
           <div class="question">
             <h2>2. Overall Experience</h2>
-            <p>How would you rate your overall experience with the Walmart website?</p>
+            <p>
+              How would you rate your overall experience with the Walmart
+              website?
+            </p>
             <div class="radio-group">
               <label class="radio-option">
-                <input type="radio" name="experience" value="excellent" required />
+                <input
+                  type="radio"
+                  name="experience"
+                  value="excellent"
+                  required
+                />
                 <span>Excellent</span>
               </label>
               <label class="radio-option">
@@ -74,7 +121,9 @@
           <!-- Dropdown List Single Choice -->
           <div class="question">
             <h2>3. Navigation Ease</h2>
-            <label for="navigation">How easy was it to navigate the website?</label>
+            <label for="navigation"
+              >How easy was it to navigate the website?</label
+            >
             <select id="navigation" name="navigation" required>
               <option value="" disabled selected>Select an option</option>
               <option value="very-easy">Very Easy</option>
@@ -85,10 +134,13 @@
             </select>
           </div>
 
-          <!-- Checkbox Multiple Selection -->
+          <!-- Checkbox Multiple Selection Question -->
           <div class="question">
             <h2>4. Website Features</h2>
-            <p>Which features of the website did you find most useful? (Select all that apply)</p>
+            <p>
+              Which features of the website did you find most useful? (Select
+              all that apply)
+            </p>
             <div class="checkbox-group">
               <label class="checkbox-option">
                 <input type="checkbox" name="features" value="search" />
@@ -120,10 +172,17 @@
           <!-- Additional Radio Question -->
           <div class="question">
             <h2>5. Visual Design</h2>
-            <p>How would you rate the visual design and layout of the website?</p>
+            <p>
+              How would you rate the visual design and layout of the website?
+            </p>
             <div class="radio-group">
               <label class="radio-option">
-                <input type="radio" name="design" value="very-appealing" required />
+                <input
+                  type="radio"
+                  name="design"
+                  value="very-appealing"
+                  required
+                />
                 <span>Very Appealing</span>
               </label>
               <label class="radio-option">
@@ -148,7 +207,9 @@
           <!-- Additional Dropdown Question -->
           <div class="question">
             <h2>6. Recommendation</h2>
-            <label for="recommend">Would you recommend this website to others?</label>
+            <label for="recommend"
+              >Would you recommend this website to others?</label
+            >
             <select id="recommend" name="recommend" required>
               <option value="" disabled selected>Select an option</option>
               <option value="definitely">Definitely Yes</option>
@@ -162,7 +223,9 @@
           <!-- Comments Section -->
           <div class="question">
             <h2>7. Additional Comments</h2>
-            <label for="comments">Please share any additional feedback or suggestions:</label>
+            <label for="comments"
+              >Please share any additional feedback or suggestions:</label
+            >
             <textarea
               id="comments"
               name="comments"
@@ -173,13 +236,17 @@
 
           <!-- Submit Button -->
           <div class="submit-section">
-            <button type="submit" class="submit-button">Submit Questionnaire</button>
+            <button type="submit" class="submit-button">
+              Submit Questionnaire
+            </button>
           </div>
         </form>
       </main>
 
       <footer>
-        <p id="signature">Website designed by Aryan Gupta, Vinusha Uthayakumar, Raman Gupta</p>
+        <p id="signature">
+          Website designed by Aryan Gupta, Vinusha Uthayakumar, Raman Gupta
+        </p>
       </footer>
     </div>
   </body>
