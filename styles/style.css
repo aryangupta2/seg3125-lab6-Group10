@@ -6,7 +6,7 @@
 }
 
 body {
-  background-image: url("/images/Blue_Background.jpg");
+  background-image: url("../images/Blue_Background.jpg");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -59,7 +59,9 @@ header h1 {
   max-width: 100%;
   border-radius: 8px;
   border: 1px solid #ddd;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .website-screenshot:hover {
@@ -100,7 +102,9 @@ textarea {
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 0.95rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 input[type="text"]:focus,
@@ -146,7 +150,9 @@ textarea:focus {
   font-size: 1rem;
   border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .submit-button:hover {
@@ -172,7 +178,9 @@ textarea:focus {
   border-radius: 6px;
   border: 1px solid #ccc;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .gallery img:hover {
