@@ -31,7 +31,7 @@ if (form) {
       const formData = new FormData(form);
       const payload = toPayload(formData);
 
-      const response = await fetch("/survey", {
+      const response = await fetch("/api/responses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

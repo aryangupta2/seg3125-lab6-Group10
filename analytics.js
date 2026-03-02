@@ -141,7 +141,7 @@ const renderError = () => {
 
 const loadAnalytics = async () => {
   try {
-    const response = await fetch("/api/analytics");
+    const response = await fetch("/api/responses/analytics");
     if (!response.ok) {
       throw new Error("Failed to fetch analytics data");
     }
