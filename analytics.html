@@ -7,15 +7,19 @@
     <title>Survey Analytics Dashboard</title>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <p class="eyebrow">Walmart UI Evaluation</p>
-        <h1>Survey Analytics Dashboard</h1>
-        <p class="subtitle">A live snapshot of respondent sentiment and feedback.</p>
+    <div class="page-shell">
+      <header class="page-header">
+        <div class="title-block">
+          <p class="eyebrow">Walmart UI Evaluation</p>
+          <h1>Survey Analytics Dashboard</h1>
+          <p class="subtitle">
+            A cleaner snapshot of survey trends, sentiment, and respondent behavior.
+          </p>
+        </div>
         <a class="back-link" href="/">Back to survey form</a>
       </header>
 
-      <main>
+      <main class="dashboard">
         <section class="metrics-grid" aria-label="Key metrics">
           <article class="metric-card">
             <p class="metric-label">Total Responses</p>
@@ -43,80 +47,89 @@
           </article>
         </section>
 
-        <section class="highlights" aria-label="Highlights">
-          <article class="highlight-card">
-            <h2>Most Useful Feature</h2>
-            <p id="highlight-feature">No responses yet</p>
-          </article>
-          <article class="highlight-card">
-            <h2>Most Common Experience</h2>
-            <p id="highlight-experience">No responses yet</p>
-          </article>
-          <article class="highlight-card">
-            <h2>Most Common Age Group</h2>
-            <p id="highlight-age-group">No responses yet</p>
-          </article>
-          <article class="highlight-card">
-            <h2>Last Updated</h2>
-            <p id="generated-at">-</p>
-          </article>
-        </section>
+        <section class="content-grid">
+          <section class="primary-visuals">
+            <section class="chart-grid" aria-label="Response charts">
+              <article class="chart-card">
+                <h2>Overall Experience</h2>
+                <div id="chart-experience" class="chart"></div>
+              </article>
 
-        <section class="chart-grid" aria-label="Response charts">
-          <article class="chart-card">
-            <h2>Overall Experience</h2>
-            <div id="chart-experience" class="chart"></div>
-          </article>
+              <article class="chart-card">
+                <h2>Navigation Ease</h2>
+                <div id="chart-navigation" class="chart"></div>
+              </article>
 
-          <article class="chart-card">
-            <h2>Navigation Ease</h2>
-            <div id="chart-navigation" class="chart"></div>
-          </article>
+              <article class="chart-card">
+                <h2>Visual Design Rating</h2>
+                <div id="chart-design" class="chart"></div>
+              </article>
 
-          <article class="chart-card">
-            <h2>Visual Design Rating</h2>
-            <div id="chart-design" class="chart"></div>
-          </article>
+              <article class="chart-card">
+                <h2>Recommendation Intent</h2>
+                <div id="chart-recommend" class="chart"></div>
+              </article>
 
-          <article class="chart-card">
-            <h2>Recommendation Intent</h2>
-            <div id="chart-recommend" class="chart"></div>
-          </article>
+              <article class="chart-card">
+                <h2>Age Group Distribution</h2>
+                <div id="chart-age-group" class="chart"></div>
+              </article>
 
-          <article class="chart-card">
-            <h2>Recommendation Split (Pie)</h2>
-            <div id="chart-recommend-pie" class="chart"></div>
-          </article>
+              <article class="chart-card">
+                <h2>Load Speed Ratings</h2>
+                <div id="chart-load-speed" class="chart chart-columns"></div>
+              </article>
 
-          <article class="chart-card">
-            <h2>Age Group Distribution</h2>
-            <div id="chart-age-group" class="chart"></div>
-          </article>
+              <article class="chart-card">
+                <h2>Tasks Completed Buckets</h2>
+                <div id="chart-tasks-completed" class="chart chart-columns"></div>
+              </article>
 
-          <article class="chart-card">
-            <h2>Load Speed Ratings</h2>
-            <div id="chart-load-speed" class="chart chart-columns"></div>
-          </article>
+              <article class="chart-card chart-card-wide">
+                <h2>Response Timeline (Last 7 Days)</h2>
+                <div id="chart-response-timeline" class="chart chart-columns"></div>
+              </article>
 
-          <article class="chart-card">
-            <h2>Tasks Completed Buckets</h2>
-            <div id="chart-tasks-completed" class="chart chart-columns"></div>
-          </article>
+              <article class="chart-card chart-card-wide">
+                <h2>Most Selected Website Features</h2>
+                <div id="chart-features" class="chart"></div>
+              </article>
+            </section>
+          </section>
 
-          <article class="chart-card chart-card-wide">
-            <h2>Response Timeline (Last 7 Days)</h2>
-            <div id="chart-response-timeline" class="chart chart-columns"></div>
-          </article>
+          <aside class="insight-column" aria-label="Insights and comments">
+            <article class="panel-card highlights-panel">
+              <h2>Quick Highlights</h2>
+              <ul class="highlights-list">
+                <li>
+                  <span class="highlight-label">Most Useful Feature</span>
+                  <span id="highlight-feature">No responses yet</span>
+                </li>
+                <li>
+                  <span class="highlight-label">Most Common Experience</span>
+                  <span id="highlight-experience">No responses yet</span>
+                </li>
+                <li>
+                  <span class="highlight-label">Most Common Age Group</span>
+                  <span id="highlight-age-group">No responses yet</span>
+                </li>
+                <li>
+                  <span class="highlight-label">Last Updated</span>
+                  <span id="generated-at">-</span>
+                </li>
+              </ul>
+            </article>
 
-          <article class="chart-card chart-card-wide">
-            <h2>Most Selected Website Features</h2>
-            <div id="chart-features" class="chart"></div>
-          </article>
-        </section>
+            <article class="chart-card">
+              <h2>Recommendation Split (Pie)</h2>
+              <div id="chart-recommend-pie" class="chart"></div>
+            </article>
 
-        <section class="comments-card" aria-label="Recent comments">
-          <h2>Recent Comments</h2>
-          <ul id="recent-comments" class="comments-list"></ul>
+            <section class="comments-card" aria-label="Recent comments">
+              <h2>Recent Comments</h2>
+              <ul id="recent-comments" class="comments-list"></ul>
+            </section>
+          </aside>
         </section>
       </main>
     </div>

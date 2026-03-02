@@ -23,12 +23,24 @@ const allChartTargetIds = [
   ...Object.values(pieChartTargets),
 ];
 
-const PIE_COLORS = ["#0071ce", "#2f95e5", "#ffc220", "#2e7d32", "#e36f00", "#6f42c1"];
+const PIE_COLORS = ["#0071ce", "#2f95e5", "#ffc220", "#2e7d32", "#f28b30", "#1f9e89"];
 
 const formatPercent = (value) => `${value.toFixed(1)}%`;
 const formatDateTime = (value) => {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? "Unknown date" : date.toLocaleString();
+};
+
+const toFiniteNumber = (value, fallback = 0) => {
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) ? numericValue : fallback;
+};
+
+const setText = (id, value) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = value;
+  }
 };
 
 const createBarRow = (item, index) => {
@@ -207,47 +219,45 @@ const renderPieChart = (containerId, values, hasResponses) => {
   container.append(pieLayout);
 };
 
-const renderMetrics = (totals) => {
-  const totalResponses = document.getElementById("metric-total-responses");
-  const positiveRate = document.getElementById("metric-positive-rate");
-  const experienceScore = document.getElementById("metric-experience-score");
-  const featuresAverage = document.getElementById("metric-features-average");
-  const loadSpeed = document.getElementById("metric-load-speed");
-  const tasksCompleted = document.getElementById("metric-tasks-completed");
+const renderMetrics = (totals = {}) => {
+  const responses = toFiniteNumber(totals.responses);
+  const positiveRate = toFiniteNumber(totals.positiveRecommendationRate);
+  const averageExperienceScore = toFiniteNumber(totals.averageExperienceScore);
+  const averageFeaturesSelected = toFiniteNumber(totals.averageFeaturesSelected);
+  const averageLoadSpeed = toFiniteNumber(totals.averageLoadSpeed);
+  const averageTasksCompleted = toFiniteNumber(totals.averageTasksCompleted);
 
-  totalResponses.textContent = totals.responses;
-  positiveRate.textContent = formatPercent(totals.positiveRecommendationRate);
-  experienceScore.textContent = `${totals.averageExperienceScore.toFixed(2)} / 5`;
-  featuresAverage.textContent = totals.averageFeaturesSelected.toFixed(2);
-  loadSpeed.textContent = `${totals.averageLoadSpeed.toFixed(2)} / 10`;
-  tasksCompleted.textContent = totals.averageTasksCompleted.toFixed(2);
+  setText("metric-total-responses", String(responses));
+  setText("metric-positive-rate", formatPercent(positiveRate));
+  setText("metric-experience-score", `${averageExperienceScore.toFixed(2)} / 5`);
+  setText("metric-features-average", averageFeaturesSelected.toFixed(2));
+  setText("metric-load-speed", `${averageLoadSpeed.toFixed(2)} / 10`);
+  setText("metric-tasks-completed", averageTasksCompleted.toFixed(2));
 };
 
-const renderHighlights = (highlights, generatedAt) => {
-  const feature = document.getElementById("highlight-feature");
-  const experience = document.getElementById("highlight-experience");
-  const ageGroup = document.getElementById("highlight-age-group");
-  const updatedAt = document.getElementById("generated-at");
-
+const renderHighlights = (highlights = {}, generatedAt) => {
   if (highlights.topFeature) {
-    feature.textContent = `${highlights.topFeature.label} (${highlights.topFeature.count} votes)`;
+    setText("highlight-feature", `${highlights.topFeature.label} (${highlights.topFeature.count} votes)`);
   } else {
-    feature.textContent = "No responses yet";
+    setText("highlight-feature", "No responses yet");
   }
 
   if (highlights.topExperience) {
-    experience.textContent = `${highlights.topExperience.label} (${highlights.topExperience.count} responses)`;
+    setText(
+      "highlight-experience",
+      `${highlights.topExperience.label} (${highlights.topExperience.count} responses)`
+    );
   } else {
-    experience.textContent = "No responses yet";
+    setText("highlight-experience", "No responses yet");
   }
 
   if (highlights.topAgeGroup) {
-    ageGroup.textContent = `${highlights.topAgeGroup.label} (${highlights.topAgeGroup.count} responses)`;
+    setText("highlight-age-group", `${highlights.topAgeGroup.label} (${highlights.topAgeGroup.count} responses)`);
   } else {
-    ageGroup.textContent = "No responses yet";
+    setText("highlight-age-group", "No responses yet");
   }
 
-  updatedAt.textContent = formatDateTime(generatedAt);
+  setText("generated-at", formatDateTime(generatedAt));
 };
 
 const renderComments = (comments) => {
@@ -258,7 +268,9 @@ const renderComments = (comments) => {
 
   list.innerHTML = "";
 
-  if (!comments.length) {
+  const safeComments = Array.isArray(comments) ? comments : [];
+
+  if (!safeComments.length) {
     const item = document.createElement("li");
     item.className = "empty-state";
     item.textContent = "No comments submitted yet.";
@@ -266,7 +278,7 @@ const renderComments = (comments) => {
     return;
   }
 
-  comments.forEach((commentEntry) => {
+  safeComments.forEach((commentEntry) => {
     const item = document.createElement("li");
     item.className = "comment-item";
 
@@ -306,24 +318,28 @@ const loadAnalytics = async () => {
     }
 
     const analytics = await response.json();
-    const hasResponses = analytics.totals.responses > 0;
+    const totals = analytics && typeof analytics === "object" ? analytics.totals || {} : {};
+    const highlights = analytics && typeof analytics === "object" ? analytics.highlights || {} : {};
+    const charts = analytics && typeof analytics === "object" ? analytics.charts || {} : {};
+    const generatedAt = analytics && typeof analytics === "object" ? analytics.generatedAt : undefined;
+    const hasResponses = toFiniteNumber(totals.responses) > 0;
 
-    renderMetrics(analytics.totals);
-    renderHighlights(analytics.highlights, analytics.generatedAt);
-    renderComments(analytics.highlights.recentComments);
+    renderMetrics(totals);
+    renderHighlights(highlights, generatedAt);
+    renderComments(highlights.recentComments);
 
     Object.entries(horizontalChartTargets).forEach(([key, target]) => {
-      const values = Array.isArray(analytics.charts[key]) ? analytics.charts[key] : [];
+      const values = Array.isArray(charts[key]) ? charts[key] : [];
       renderHorizontalChart(target, values, hasResponses);
     });
 
     Object.entries(columnChartTargets).forEach(([key, target]) => {
-      const values = Array.isArray(analytics.charts[key]) ? analytics.charts[key] : [];
+      const values = Array.isArray(charts[key]) ? charts[key] : [];
       renderColumnChart(target, values, hasResponses);
     });
 
     Object.entries(pieChartTargets).forEach(([key, target]) => {
-      const values = Array.isArray(analytics.charts[key]) ? analytics.charts[key] : [];
+      const values = Array.isArray(charts[key]) ? charts[key] : [];
       renderPieChart(target, values, hasResponses);
     });
   } catch (error) {
