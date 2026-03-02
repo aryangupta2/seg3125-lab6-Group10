@@ -13,10 +13,17 @@ const columnChartTargets = {
   responseTimeline: "chart-response-timeline",
 };
 
+const pieChartTargets = {
+  recommend: "chart-recommend-pie",
+};
+
 const allChartTargetIds = [
   ...Object.values(horizontalChartTargets),
   ...Object.values(columnChartTargets),
+  ...Object.values(pieChartTargets),
 ];
+
+const PIE_COLORS = ["#0071ce", "#2f95e5", "#ffc220", "#2e7d32", "#e36f00", "#6f42c1"];
 
 const formatPercent = (value) => `${value.toFixed(1)}%`;
 const formatDateTime = (value) => {
@@ -121,6 +128,83 @@ const renderColumnChart = (containerId, values, hasResponses) => {
   });
 
   container.append(chart);
+};
+
+const createPieLegendItem = (item, color, total) => {
+  const legendItem = document.createElement("li");
+  legendItem.className = "pie-legend-item";
+
+  const swatch = document.createElement("span");
+  swatch.className = "pie-swatch";
+  swatch.style.backgroundColor = color;
+
+  const label = document.createElement("span");
+  label.textContent = item.label;
+
+  const value = document.createElement("span");
+  value.className = "pie-legend-value";
+  const percent = total === 0 ? 0 : (item.count / total) * 100;
+  value.textContent = `${item.count} (${formatPercent(percent)})`;
+
+  legendItem.append(swatch, label, value);
+  return legendItem;
+};
+
+const renderPieChart = (containerId, values, hasResponses) => {
+  const container = document.getElementById(containerId);
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  const nonZeroValues = values.filter((item) => item.count > 0);
+  const total = nonZeroValues.reduce((sum, item) => sum + item.count, 0);
+
+  if (!hasResponses || total === 0) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = "No responses yet.";
+    container.append(empty);
+    return;
+  }
+
+  let currentAngle = 0;
+  const segments = nonZeroValues.map((item, index) => {
+    const start = currentAngle;
+    currentAngle += (item.count / total) * 360;
+    const color = PIE_COLORS[index % PIE_COLORS.length];
+    return { color, start, end: currentAngle, item };
+  });
+
+  const pieLayout = document.createElement("div");
+  pieLayout.className = "pie-layout";
+
+  const pieGraphic = document.createElement("div");
+  pieGraphic.className = "pie-graphic";
+  pieGraphic.style.backgroundImage = `conic-gradient(${segments
+    .map((segment) => `${segment.color} ${segment.start}deg ${segment.end}deg`)
+    .join(",")})`;
+
+  const pieCenter = document.createElement("div");
+  pieCenter.className = "pie-center";
+
+  const totalValue = document.createElement("strong");
+  totalValue.textContent = String(total);
+  const totalLabel = document.createElement("span");
+  totalLabel.textContent = "responses";
+
+  pieCenter.append(totalValue, totalLabel);
+  pieGraphic.append(pieCenter);
+
+  const legend = document.createElement("ul");
+  legend.className = "pie-legend";
+  segments.forEach((segment) => {
+    legend.append(createPieLegendItem(segment.item, segment.color, total));
+  });
+
+  pieLayout.append(pieGraphic, legend);
+  container.append(pieLayout);
 };
 
 const renderMetrics = (totals) => {
@@ -236,6 +320,11 @@ const loadAnalytics = async () => {
     Object.entries(columnChartTargets).forEach(([key, target]) => {
       const values = Array.isArray(analytics.charts[key]) ? analytics.charts[key] : [];
       renderColumnChart(target, values, hasResponses);
+    });
+
+    Object.entries(pieChartTargets).forEach(([key, target]) => {
+      const values = Array.isArray(analytics.charts[key]) ? analytics.charts[key] : [];
+      renderPieChart(target, values, hasResponses);
     });
   } catch (error) {
     renderError();
