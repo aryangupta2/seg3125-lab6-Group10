@@ -13,6 +13,11 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "index.js",
-  "scripts": {}
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
