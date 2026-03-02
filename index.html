@@ -18,7 +18,6 @@
       </header>
 
       <main>
-        <!-- An image of the homepage that also serves as a link to the website -->
         <div class="image-section">
           <a href="https://www.walmart.ca" target="_blank">
             <img
@@ -28,7 +27,7 @@
             />
           </a>
           <p class="image-caption">Click the image to visit Walmart.ca</p>
-          <!--  A photo gallery to show multiple pages of the Walmart site -->
+
           <div class="gallery">
             <a href="#zoom-1">
               <img src="images/Walmart_Home_Page.png" alt="Homepage" />
@@ -48,8 +47,7 @@
 
         <div id="zoom-1" class="zoom-overlay">
           <a href="#" class="close">&times;</a>
-            <img src="images/Walmart_Home_Page.png" alt="Zoomed Homepage" />
-          </a>
+          <img src="images/Walmart_Home_Page.png" alt="Zoomed Homepage" />
         </div>
 
         <div id="zoom-2" class="zoom-overlay">
@@ -67,179 +65,249 @@
           <img src="images/Cart_Page.png" alt="Zoomed Cart Page" />
         </div>
 
-        <!-- A form containing at least 6 questions -->
         <form id="evaluation-form">
-          <!-- Text-type question -->
-          <div class="question">
-            <h2>1. Personal Information</h2>
-            <label for="fullname">Full Name:</label>
-            <input
-              type="text"
-              id="fullname"
-              name="fullname"
-              placeholder="Enter your full name"
-              required
-            />
+          <div class="form-header">
+            <p class="step-indicator" id="step-indicator">Step 1 of 4</p>
+            <div class="progress-track" aria-hidden="true">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
           </div>
 
-          <!-- Radio Button Single Choice -->
-          <div class="question">
-            <h2>2. Overall Experience</h2>
-            <p>
-              How would you rate your overall experience with the Walmart
-              website?
-            </p>
-            <div class="radio-group">
-              <label class="radio-option">
+          <section class="form-step active" data-step="1">
+            <div class="question">
+              <h2>1. Personal Information</h2>
+              <label for="fullname">Full Name:</label>
+              <input
+                type="text"
+                id="fullname"
+                name="fullname"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+            <div class="question">
+              <h2>2. Contact Email</h2>
+              <label for="email">Email Address:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="name@example.com"
+                required
+              />
+            </div>
+
+            <div class="question">
+              <h2>3. Age Group</h2>
+              <label for="age-group">Choose your age group:</label>
+              <select id="age-group" name="ageGroup" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="18-24">18-24</option>
+                <option value="25-34">25-34</option>
+                <option value="35-44">35-44</option>
+                <option value="45-54">45-54</option>
+                <option value="55+">55+</option>
+              </select>
+            </div>
+
+            <div class="step-actions single-action">
+              <button type="button" class="nav-button next-button" data-action="next">
+                Next Page
+              </button>
+            </div>
+          </section>
+
+          <section class="form-step" data-step="2">
+            <div class="question">
+              <h2>4. Overall Experience</h2>
+              <p>How would you rate your overall experience with the Walmart website?</p>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="experience" value="excellent" required />
+                  <span>Excellent</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="experience" value="good" />
+                  <span>Good</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="experience" value="average" />
+                  <span>Average</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="experience" value="poor" />
+                  <span>Poor</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="experience" value="very-poor" />
+                  <span>Very Poor</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="question">
+              <h2>5. Navigation Ease</h2>
+              <label for="navigation">How easy was it to navigate the website?</label>
+              <select id="navigation" name="navigation" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="very-easy">Very Easy</option>
+                <option value="easy">Easy</option>
+                <option value="neutral">Neutral</option>
+                <option value="difficult">Difficult</option>
+                <option value="very-difficult">Very Difficult</option>
+              </select>
+            </div>
+
+            <div class="question">
+              <h2>6. Visual Design</h2>
+              <p>How would you rate the visual design and layout of the website?</p>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="design" value="very-appealing" required />
+                  <span>Very Appealing</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="design" value="appealing" />
+                  <span>Appealing</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="design" value="neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="design" value="unappealing" />
+                  <span>Unappealing</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="design" value="very-unappealing" />
+                  <span>Very Unappealing</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="nav-button back-button" data-action="prev">
+                Previous Page
+              </button>
+              <button type="button" class="nav-button next-button" data-action="next">
+                Next Page
+              </button>
+            </div>
+          </section>
+
+          <section class="form-step" data-step="3">
+            <div class="question">
+              <h2>7. Website Features</h2>
+              <p>Which features did you find most useful? (Select all that apply)</p>
+              <div class="checkbox-group">
+                <label class="checkbox-option">
+                  <input type="checkbox" name="features" value="search" />
+                  <span>Search Functionality</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="features" value="categories" />
+                  <span>Product Categories</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="features" value="filters" />
+                  <span>Filtering Options</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="features" value="cart" />
+                  <span>Shopping Cart</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="features" value="reviews" />
+                  <span>Customer Reviews</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="features" value="deals" />
+                  <span>Deals and Promotions</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="question">
+              <h2>8. Recommendation Intent</h2>
+              <label for="recommend">Would you recommend this website to others?</label>
+              <select id="recommend" name="recommend" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="definitely">Definitely Yes</option>
+                <option value="probably">Probably Yes</option>
+                <option value="not-sure">Not Sure</option>
+                <option value="probably-not">Probably Not</option>
+                <option value="definitely-not">Definitely Not</option>
+              </select>
+            </div>
+
+            <div class="question">
+              <h2>9. Page Loading Satisfaction</h2>
+              <label for="load-speed-rating">
+                Rate the page loading speed (1 = Very Slow, 10 = Very Fast):
+              </label>
+              <div class="range-row">
                 <input
-                  type="radio"
-                  name="experience"
-                  value="excellent"
-                  required
+                  type="range"
+                  id="load-speed-rating"
+                  name="loadSpeedRating"
+                  min="1"
+                  max="10"
+                  value="6"
                 />
-                <span>Excellent</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="experience" value="good" />
-                <span>Good</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="experience" value="average" />
-                <span>Average</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="experience" value="poor" />
-                <span>Poor</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="experience" value="very-poor" />
-                <span>Very Poor</span>
-              </label>
+                <output id="load-speed-value" for="load-speed-rating">6</output>
+              </div>
             </div>
-          </div>
 
-          <!-- Dropdown List Single Choice -->
-          <div class="question">
-            <h2>3. Navigation Ease</h2>
-            <label for="navigation"
-              >How easy was it to navigate the website?</label
-            >
-            <select id="navigation" name="navigation" required>
-              <option value="" disabled selected>Select an option</option>
-              <option value="very-easy">Very Easy</option>
-              <option value="easy">Easy</option>
-              <option value="neutral">Neutral</option>
-              <option value="difficult">Difficult</option>
-              <option value="very-difficult">Very Difficult</option>
-            </select>
-          </div>
-
-          <!-- Checkbox Multiple Selection Question -->
-          <div class="question">
-            <h2>4. Website Features</h2>
-            <p>
-              Which features of the website did you find most useful? (Select
-              all that apply)
-            </p>
-            <div class="checkbox-group">
-              <label class="checkbox-option">
-                <input type="checkbox" name="features" value="search" />
-                <span>Search Functionality</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="features" value="categories" />
-                <span>Product Categories</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="features" value="filters" />
-                <span>Filtering Options</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="features" value="cart" />
-                <span>Shopping Cart</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="features" value="reviews" />
-                <span>Customer Reviews</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="features" value="deals" />
-                <span>Deals and Promotions</span>
-              </label>
+            <div class="step-actions">
+              <button type="button" class="nav-button back-button" data-action="prev">
+                Previous Page
+              </button>
+              <button type="button" class="nav-button next-button" data-action="next">
+                Next Page
+              </button>
             </div>
-          </div>
+          </section>
 
-          <!-- Additional Radio Question -->
-          <div class="question">
-            <h2>5. Visual Design</h2>
-            <p>
-              How would you rate the visual design and layout of the website?
-            </p>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input
-                  type="radio"
-                  name="design"
-                  value="very-appealing"
-                  required
-                />
-                <span>Very Appealing</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="design" value="appealing" />
-                <span>Appealing</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="design" value="neutral" />
-                <span>Neutral</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="design" value="unappealing" />
-                <span>Unappealing</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="design" value="very-unappealing" />
-                <span>Very Unappealing</span>
-              </label>
+          <section class="form-step" data-step="4">
+            <div class="question">
+              <h2>10. Most Recent Visit</h2>
+              <label for="last-visit">When did you last use Walmart.ca?</label>
+              <input type="date" id="last-visit" name="lastVisitDate" required />
             </div>
-          </div>
 
-          <!-- Additional Dropdown Question -->
-          <div class="question">
-            <h2>6. Recommendation</h2>
-            <label for="recommend"
-              >Would you recommend this website to others?</label
-            >
-            <select id="recommend" name="recommend" required>
-              <option value="" disabled selected>Select an option</option>
-              <option value="definitely">Definitely Yes</option>
-              <option value="probably">Probably Yes</option>
-              <option value="not-sure">Not Sure</option>
-              <option value="probably-not">Probably Not</option>
-              <option value="definitely-not">Definitely Not</option>
-            </select>
-          </div>
+            <div class="question">
+              <h2>11. Completed Tasks</h2>
+              <label for="tasks-completed">How many shopping tasks did you complete?</label>
+              <input
+                type="number"
+                id="tasks-completed"
+                name="tasksCompleted"
+                min="0"
+                max="50"
+                placeholder="e.g. 4"
+                required
+              />
+            </div>
 
-          <!-- Comments Section -->
-          <div class="question">
-            <h2>7. Additional Comments</h2>
-            <label for="comments"
-              >Please share any additional feedback or suggestions:</label
-            >
-            <textarea
-              id="comments"
-              name="comments"
-              rows="5"
-              placeholder="Enter your comments here..."
-            ></textarea>
-          </div>
+            <div class="question">
+              <h2>12. Additional Comments</h2>
+              <label for="comments">Please share any additional feedback or suggestions:</label>
+              <textarea
+                id="comments"
+                name="comments"
+                rows="5"
+                placeholder="Enter your comments here..."
+              ></textarea>
+            </div>
 
-          <!-- Submit Button -->
-          <div class="submit-section">
-            <button type="submit" class="submit-button">
-              Submit Questionnaire
-            </button>
-          </div>
+            <div class="step-actions">
+              <button type="button" class="nav-button back-button" data-action="prev">
+                Previous Page
+              </button>
+              <button type="submit" class="submit-button">Submit Questionnaire</button>
+            </div>
+          </section>
         </form>
       </main>
 
