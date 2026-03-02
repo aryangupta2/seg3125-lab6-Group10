@@ -4,7 +4,8 @@ const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SUBMISSIONS_PATH = path.join(__dirname, ".data", "submissions.json");
+const SUBMISSIONS_PATH = path.join(__dirname, "data", "submissions.json");
+const LEGACY_SUBMISSIONS_PATH = path.join(__dirname, ".data", "submissions.json");
 
 const CHART_OPTIONS = {
   experience: [
@@ -54,10 +55,22 @@ const EXPERIENCE_SCORES = {
 };
 
 const readSubmissions = async () => {
-  try {
-    const fileContent = await fs.readFile(SUBMISSIONS_PATH, "utf8");
+  const readFromPath = async (filePath) => {
+    const fileContent = await fs.readFile(filePath, "utf8");
     const parsed = JSON.parse(fileContent);
     return Array.isArray(parsed) ? parsed : [];
+  };
+
+  try {
+    return await readFromPath(SUBMISSIONS_PATH);
+  } catch (error) {
+    if (error.code !== "ENOENT") {
+      throw error;
+    }
+  }
+
+  try {
+    return await readFromPath(LEGACY_SUBMISSIONS_PATH);
   } catch (error) {
     if (error.code === "ENOENT") {
       return [];
