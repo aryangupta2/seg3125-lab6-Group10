@@ -1,4 +1,4 @@
-const { toArray, readSubmissions } = require("../services/submissionService");
+const { toArray, readSubmissions } = require("./submissionData");
 
 const CHART_OPTIONS = {
   experience: [

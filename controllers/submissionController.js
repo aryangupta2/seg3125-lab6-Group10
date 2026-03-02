@@ -1,15 +1,10 @@
 const { randomUUID } = require("crypto");
-const {
-  toArray,
-  readSubmissions,
-  writeSubmissions,
-  withDerivedIds,
-} = require("../services/submissionService");
+const { toArray, readSubmissions, writeSubmissions } = require("./submissionData");
 
 const listResponses = async (req, res) => {
   try {
     const submissions = await readSubmissions();
-    res.json(withDerivedIds(submissions));
+    res.json(submissions);
   } catch (error) {
     console.error("Failed to load survey submissions:", error);
     res.status(500).json({ message: "Failed to load survey submissions." });
@@ -39,7 +34,7 @@ const createResponse = async (req, res) => {
 
 const getResponseById = async (req, res) => {
   try {
-    const submissions = withDerivedIds(await readSubmissions());
+    const submissions = await readSubmissions();
     const submission = submissions.find((item) => item.id === req.params.id);
 
     if (!submission) {
