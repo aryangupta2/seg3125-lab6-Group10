@@ -1,10 +1,4 @@
-const fs = require("fs/promises");
-const path = require("path");
-const { randomUUID } = require("crypto");
-
-const DATA_DIR = path.join(__dirname, "..", "data");
-const SUBMISSIONS_PATH = path.join(DATA_DIR, "submissions.json");
-const LEGACY_SUBMISSIONS_PATH = path.join(__dirname, "..", ".data", "submissions.json");
+const { toArray, readSubmissions } = require("../services/submissionService");
 
 const CHART_OPTIONS = {
   experience: [
@@ -51,61 +45,6 @@ const EXPERIENCE_SCORES = {
   average: 3,
   poor: 2,
   "very-poor": 1,
-};
-
-const toArray = (value) => {
-  if (Array.isArray(value)) {
-    return value;
-  }
-
-  if (typeof value === "string" && value.trim() !== "") {
-    return [value];
-  }
-
-  return [];
-};
-
-const readFromPath = async (filePath) => {
-  const fileContent = await fs.readFile(filePath, "utf8");
-  const parsed = JSON.parse(fileContent);
-  return Array.isArray(parsed) ? parsed : [];
-};
-
-const readSubmissions = async () => {
-  try {
-    return await readFromPath(SUBMISSIONS_PATH);
-  } catch (error) {
-    if (error.code !== "ENOENT") {
-      throw error;
-    }
-  }
-
-  try {
-    return await readFromPath(LEGACY_SUBMISSIONS_PATH);
-  } catch (error) {
-    if (error.code === "ENOENT") {
-      return [];
-    }
-    throw error;
-  }
-};
-
-const writeSubmissions = async (submissions) => {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-  await fs.writeFile(SUBMISSIONS_PATH, JSON.stringify(submissions, null, 2));
-};
-
-const withDerivedIds = (submissions) => {
-  return submissions.map((submission, index) => {
-    if (submission.id) {
-      return submission;
-    }
-
-    return {
-      ...submission,
-      id: `legacy-${index + 1}`,
-    };
-  });
 };
 
 const buildSingleSelectDistribution = (submissions, fieldName, options) => {
@@ -247,54 +186,6 @@ const buildAnalyticsData = (submissions) => {
   };
 };
 
-const listResponses = async (req, res) => {
-  try {
-    const submissions = await readSubmissions();
-    res.json(withDerivedIds(submissions));
-  } catch (error) {
-    console.error("Failed to load survey submissions:", error);
-    res.status(500).json({ message: "Failed to load survey submissions." });
-  }
-};
-
-const createResponse = async (req, res) => {
-  const submission = {
-    id: randomUUID(),
-    ...req.body,
-    features: toArray(req.body.features),
-    submittedAt: new Date().toISOString(),
-  };
-
-  try {
-    const submissions = await readSubmissions();
-    submissions.push(submission);
-    await writeSubmissions(submissions);
-
-    res.location(`/api/responses/${submission.id}`);
-    res.status(201).json(submission);
-  } catch (error) {
-    console.error("Failed to save survey submission:", error);
-    res.status(500).json({ message: "Failed to save survey submission." });
-  }
-};
-
-const getResponseById = async (req, res) => {
-  try {
-    const submissions = withDerivedIds(await readSubmissions());
-    const submission = submissions.find((item) => item.id === req.params.id);
-
-    if (!submission) {
-      res.status(404).json({ message: "Survey response not found." });
-      return;
-    }
-
-    res.json(submission);
-  } catch (error) {
-    console.error("Failed to load survey submission:", error);
-    res.status(500).json({ message: "Failed to load survey submission." });
-  }
-};
-
 const getResponsesAnalytics = async (req, res) => {
   try {
     const submissions = await readSubmissions();
@@ -307,8 +198,5 @@ const getResponsesAnalytics = async (req, res) => {
 };
 
 module.exports = {
-  listResponses,
-  createResponse,
-  getResponseById,
   getResponsesAnalytics,
 };

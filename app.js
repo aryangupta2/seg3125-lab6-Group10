@@ -4,8 +4,8 @@ const {
   listResponses,
   createResponse,
   getResponseById,
-  getResponsesAnalytics,
-} = require("./controllers/responseController");
+} = require("./controllers/submissionController");
+const { getResponsesAnalytics } = require("./controllers/analyticsController");
 
 const app = express();
 
