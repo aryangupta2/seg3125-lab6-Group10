@@ -159,3 +159,72 @@ if (form) {
     }
   });
 }
+
+// Keyboard navigation + close behavior for Walmart image zoom overlays
+const zoomOverlays = Array.from(document.querySelectorAll(".zoom-overlay"));
+let activeZoomIndex = -1;
+
+const setActiveZoom = (index) => {
+  zoomOverlays.forEach((overlay, overlayIndex) => {
+    overlay.classList.toggle("is-open", overlayIndex === index);
+  });
+  activeZoomIndex = index;
+};
+
+const closeActiveZoom = () => {
+  if (activeZoomIndex !== -1) {
+    setActiveZoom(-1);
+  }
+};
+
+document.addEventListener("click", (event) => {
+  const galleryLink = event.target.closest('.gallery a[href^="#zoom-"]');
+  if (galleryLink) {
+    event.preventDefault();
+    const targetId = (galleryLink.getAttribute("href") || "").replace("#", "");
+    const zoomIndex = zoomOverlays.findIndex((overlay) => overlay.id === targetId);
+    if (zoomIndex !== -1) {
+      setActiveZoom(zoomIndex);
+    }
+    return;
+  }
+
+  if (event.target.closest(".zoom-overlay .close")) {
+    event.preventDefault();
+    closeActiveZoom();
+    return;
+  }
+
+  const overlay = event.target.closest(".zoom-overlay");
+  if (overlay && event.target === overlay) {
+    closeActiveZoom();
+  }
+});
+
+window.addEventListener(
+  "keydown",
+  (event) => {
+    if (activeZoomIndex === -1) {
+      return;
+    }
+
+    if (event.key === "Escape") {
+      event.preventDefault();
+      event.stopPropagation();
+      closeActiveZoom();
+      return;
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      setActiveZoom((activeZoomIndex + 1) % zoomOverlays.length);
+      return;
+    }
+
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      setActiveZoom((activeZoomIndex - 1 + zoomOverlays.length) % zoomOverlays.length);
+    }
+  },
+  true,
+);

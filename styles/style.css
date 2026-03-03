@@ -294,6 +294,10 @@ input[type="range"] {
   display: flex;
 }
 
+.zoom-overlay.is-open {
+  display: flex;
+}
+
 .close {
   position: absolute;
   top: 20px;
