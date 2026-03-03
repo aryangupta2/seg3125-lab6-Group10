@@ -313,6 +313,28 @@ const buildAnalyticsData = (submissions) => {
   const topFeature = findTopItem(featureDistribution);
   const topExperience = findTopItem(experienceDistribution);
   const topAgeGroup = findTopItem(ageGroupDistribution);
+  const responses = submissions
+    .slice()
+    .sort(
+      (a, b) =>
+        new Date(b.submittedAt || 0).getTime() - new Date(a.submittedAt || 0).getTime()
+    )
+    .map((submission) => ({
+      id: submission.id,
+      fullname: submission.fullname || "",
+      email: submission.email || "",
+      ageGroup: submission.ageGroup || "",
+      experience: submission.experience || "",
+      navigation: submission.navigation || "",
+      features: toArray(submission.features),
+      design: submission.design || "",
+      recommend: submission.recommend || "",
+      loadSpeedRating: submission.loadSpeedRating || "",
+      tasksCompleted: submission.tasksCompleted || "",
+      lastVisitDate: submission.lastVisitDate || "",
+      comments: submission.comments || "",
+      submittedAt: submission.submittedAt,
+    }));
 
   return {
     totals: {
@@ -351,6 +373,7 @@ const buildAnalyticsData = (submissions) => {
       responseTimeline: responseTimelineDistribution,
       features: featureDistribution,
     },
+    responses,
     generatedAt: new Date().toISOString(),
   };
 };

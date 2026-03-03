@@ -24,11 +24,60 @@ const allChartTargetIds = [
 ];
 
 const PIE_COLORS = ["#0071ce", "#2f95e5", "#ffc220", "#2e7d32", "#f28b30", "#1f9e89"];
+const OPTION_LABELS = {
+  experience: {
+    excellent: "Excellent",
+    good: "Good",
+    average: "Average",
+    poor: "Poor",
+    "very-poor": "Very Poor",
+  },
+  navigation: {
+    "very-easy": "Very Easy",
+    easy: "Easy",
+    neutral: "Neutral",
+    difficult: "Difficult",
+    "very-difficult": "Very Difficult",
+  },
+  design: {
+    "very-appealing": "Very Appealing",
+    appealing: "Appealing",
+    neutral: "Neutral",
+    unappealing: "Unappealing",
+    "very-unappealing": "Very Unappealing",
+  },
+  recommend: {
+    definitely: "Definitely Yes",
+    probably: "Probably Yes",
+    "not-sure": "Not Sure",
+    "probably-not": "Probably Not",
+    "definitely-not": "Definitely Not",
+  },
+  ageGroup: {
+    "18-24": "18-24",
+    "25-34": "25-34",
+    "35-44": "35-44",
+    "45-54": "45-54",
+    "55+": "55+",
+  },
+  feature: {
+    search: "Search Functionality",
+    categories: "Product Categories",
+    filters: "Filtering Options",
+    cart: "Shopping Cart",
+    reviews: "Customer Reviews",
+    deals: "Deals and Promotions",
+  },
+};
 
 const formatPercent = (value) => `${value.toFixed(1)}%`;
 const formatDateTime = (value) => {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? "Unknown date" : date.toLocaleString();
+};
+const formatDate = (value) => {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "Not provided" : date.toLocaleDateString();
 };
 
 const toFiniteNumber = (value, fallback = 0) => {
@@ -295,6 +344,92 @@ const renderComments = (comments) => {
   });
 };
 
+const createResponseField = (labelText, valueText) => {
+  const item = document.createElement("div");
+  item.className = "response-field";
+
+  const label = document.createElement("p");
+  label.className = "response-field-label";
+  label.textContent = labelText;
+
+  const value = document.createElement("p");
+  value.className = "response-field-value";
+  value.textContent = valueText;
+
+  item.append(label, value);
+  return item;
+};
+
+const renderAllResponses = (responses) => {
+  const container = document.getElementById("all-responses");
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+  const safeResponses = Array.isArray(responses) ? responses : [];
+
+  if (!safeResponses.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = "No responses submitted yet.";
+    container.append(empty);
+    return;
+  }
+
+  safeResponses.forEach((response, index) => {
+    const details = document.createElement("details");
+    details.className = "response-item";
+
+    const summary = document.createElement("summary");
+    summary.className = "response-summary";
+    summary.textContent = `${response.fullname || "Anonymous"} · ${formatDateTime(response.submittedAt)}`;
+
+    const content = document.createElement("div");
+    content.className = "response-content";
+
+    const fields = document.createElement("div");
+    fields.className = "response-fields-grid";
+
+    const featureLabels = (Array.isArray(response.features) ? response.features : [])
+      .map((feature) => OPTION_LABELS.feature[feature] || feature)
+      .join(", ");
+
+    fields.append(
+      createResponseField("Email", response.email || "Not provided"),
+      createResponseField("Age Group", OPTION_LABELS.ageGroup?.[response.ageGroup] || response.ageGroup || "Not provided"),
+      createResponseField(
+        "Overall Experience",
+        OPTION_LABELS.experience[response.experience] || response.experience || "Not provided"
+      ),
+      createResponseField(
+        "Navigation Ease",
+        OPTION_LABELS.navigation[response.navigation] || response.navigation || "Not provided"
+      ),
+      createResponseField(
+        "Visual Design",
+        OPTION_LABELS.design[response.design] || response.design || "Not provided"
+      ),
+      createResponseField(
+        "Recommendation",
+        OPTION_LABELS.recommend[response.recommend] || response.recommend || "Not provided"
+      ),
+      createResponseField("Features Selected", featureLabels || "None selected"),
+      createResponseField("Load Speed Rating", response.loadSpeedRating ? `${response.loadSpeedRating} / 10` : "Not provided"),
+      createResponseField("Tasks Completed", response.tasksCompleted || "Not provided"),
+      createResponseField("Most Recent Visit", formatDate(response.lastVisitDate)),
+      createResponseField("Comments", response.comments ? response.comments.trim() : "No comments")
+    );
+
+    content.append(fields);
+    details.append(summary, content);
+    if (index === 0) {
+      details.open = true;
+    }
+    container.append(details);
+  });
+};
+
 const renderError = () => {
   const chartContainers = allChartTargetIds.map((id) => document.getElementById(id));
   chartContainers.forEach((container) => {
@@ -310,6 +445,40 @@ const renderError = () => {
   });
 };
 
+const dashboardPageIds = ["overview", "charts", "comments", "responses"];
+
+const setActiveDashboardPage = (pageId) => {
+  if (!dashboardPageIds.includes(pageId)) {
+    return;
+  }
+
+  const pages = Array.from(document.querySelectorAll(".dashboard-page"));
+  pages.forEach((page) => {
+    const isActive = page.dataset.pageId === pageId;
+    page.classList.toggle("active", isActive);
+  });
+
+  const pageButtons = Array.from(document.querySelectorAll(".page-tab"));
+  pageButtons.forEach((button) => {
+    const isActive = button.dataset.pageTarget === pageId;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+};
+
+const initDashboardControls = () => {
+  const pageButtons = Array.from(document.querySelectorAll(".page-tab"));
+
+  pageButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const pageId = button.dataset.pageTarget;
+      setActiveDashboardPage(pageId);
+    });
+  });
+
+  setActiveDashboardPage(dashboardPageIds[0]);
+};
+
 const loadAnalytics = async () => {
   try {
     const response = await fetch("/api/responses/analytics");
@@ -321,12 +490,14 @@ const loadAnalytics = async () => {
     const totals = analytics && typeof analytics === "object" ? analytics.totals || {} : {};
     const highlights = analytics && typeof analytics === "object" ? analytics.highlights || {} : {};
     const charts = analytics && typeof analytics === "object" ? analytics.charts || {} : {};
+    const responses = analytics && typeof analytics === "object" ? analytics.responses || [] : [];
     const generatedAt = analytics && typeof analytics === "object" ? analytics.generatedAt : undefined;
     const hasResponses = toFiniteNumber(totals.responses) > 0;
 
     renderMetrics(totals);
     renderHighlights(highlights, generatedAt);
     renderComments(highlights.recentComments);
+    renderAllResponses(responses);
 
     Object.entries(horizontalChartTargets).forEach(([key, target]) => {
       const values = Array.isArray(charts[key]) ? charts[key] : [];
@@ -347,4 +518,5 @@ const loadAnalytics = async () => {
   }
 };
 
+initDashboardControls();
 loadAnalytics();

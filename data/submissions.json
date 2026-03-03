@@ -6,7 +6,11 @@
     "ageGroup": "18-24",
     "experience": "excellent",
     "navigation": "very-easy",
-    "features": ["search", "filters", "deals"],
+    "features": [
+      "search",
+      "filters",
+      "deals"
+    ],
     "design": "very-appealing",
     "recommend": "definitely",
     "loadSpeedRating": "9",
@@ -22,7 +26,11 @@
     "ageGroup": "25-34",
     "experience": "good",
     "navigation": "easy",
-    "features": ["search", "categories", "cart"],
+    "features": [
+      "search",
+      "categories",
+      "cart"
+    ],
     "design": "appealing",
     "recommend": "probably",
     "loadSpeedRating": "8",
@@ -38,7 +46,10 @@
     "ageGroup": "35-44",
     "experience": "average",
     "navigation": "neutral",
-    "features": ["categories", "reviews"],
+    "features": [
+      "categories",
+      "reviews"
+    ],
     "design": "neutral",
     "recommend": "not-sure",
     "loadSpeedRating": "6",
@@ -54,7 +65,11 @@
     "ageGroup": "25-34",
     "experience": "good",
     "navigation": "easy",
-    "features": ["search", "cart", "deals"],
+    "features": [
+      "search",
+      "cart",
+      "deals"
+    ],
     "design": "appealing",
     "recommend": "probably",
     "loadSpeedRating": "7",
@@ -70,7 +85,9 @@
     "ageGroup": "45-54",
     "experience": "poor",
     "navigation": "difficult",
-    "features": ["categories"],
+    "features": [
+      "categories"
+    ],
     "design": "unappealing",
     "recommend": "probably-not",
     "loadSpeedRating": "4",
@@ -86,7 +103,12 @@
     "ageGroup": "18-24",
     "experience": "excellent",
     "navigation": "very-easy",
-    "features": ["search", "filters", "reviews", "deals"],
+    "features": [
+      "search",
+      "filters",
+      "reviews",
+      "deals"
+    ],
     "design": "very-appealing",
     "recommend": "definitely",
     "loadSpeedRating": "10",
@@ -102,7 +124,10 @@
     "ageGroup": "55+",
     "experience": "average",
     "navigation": "neutral",
-    "features": ["categories", "cart"],
+    "features": [
+      "categories",
+      "cart"
+    ],
     "design": "neutral",
     "recommend": "not-sure",
     "loadSpeedRating": "5",
@@ -118,7 +143,11 @@
     "ageGroup": "35-44",
     "experience": "good",
     "navigation": "easy",
-    "features": ["search", "reviews", "cart"],
+    "features": [
+      "search",
+      "reviews",
+      "cart"
+    ],
     "design": "appealing",
     "recommend": "probably",
     "loadSpeedRating": "8",
@@ -134,7 +163,9 @@
     "ageGroup": "45-54",
     "experience": "very-poor",
     "navigation": "very-difficult",
-    "features": ["search"],
+    "features": [
+      "search"
+    ],
     "design": "very-unappealing",
     "recommend": "definitely-not",
     "loadSpeedRating": "2",
@@ -150,7 +181,12 @@
     "ageGroup": "25-34",
     "experience": "good",
     "navigation": "easy",
-    "features": ["search", "filters", "cart", "deals"],
+    "features": [
+      "search",
+      "filters",
+      "cart",
+      "deals"
+    ],
     "design": "appealing",
     "recommend": "definitely",
     "loadSpeedRating": "9",
@@ -166,7 +202,10 @@
     "ageGroup": "55+",
     "experience": "poor",
     "navigation": "difficult",
-    "features": ["categories", "reviews"],
+    "features": [
+      "categories",
+      "reviews"
+    ],
     "design": "unappealing",
     "recommend": "probably-not",
     "loadSpeedRating": "3",
@@ -182,7 +221,13 @@
     "ageGroup": "18-24",
     "experience": "excellent",
     "navigation": "very-easy",
-    "features": ["search", "filters", "reviews", "deals", "cart"],
+    "features": [
+      "search",
+      "filters",
+      "reviews",
+      "deals",
+      "cart"
+    ],
     "design": "very-appealing",
     "recommend": "definitely",
     "loadSpeedRating": "10",
@@ -198,7 +243,10 @@
     "ageGroup": "35-44",
     "experience": "average",
     "navigation": "neutral",
-    "features": ["search", "categories"],
+    "features": [
+      "search",
+      "categories"
+    ],
     "design": "neutral",
     "recommend": "not-sure",
     "loadSpeedRating": "6",
@@ -214,7 +262,11 @@
     "ageGroup": "25-34",
     "experience": "good",
     "navigation": "easy",
-    "features": ["cart", "deals", "reviews"],
+    "features": [
+      "cart",
+      "deals",
+      "reviews"
+    ],
     "design": "appealing",
     "recommend": "probably",
     "loadSpeedRating": "7",
@@ -230,7 +282,11 @@
     "ageGroup": "45-54",
     "experience": "good",
     "navigation": "easy",
-    "features": ["search", "cart", "deals"],
+    "features": [
+      "search",
+      "cart",
+      "deals"
+    ],
     "design": "appealing",
     "recommend": "probably",
     "loadSpeedRating": "8",
@@ -238,5 +294,23 @@
     "lastVisitDate": "2026-02-27",
     "comments": "Overall good value and fast repeat purchases.",
     "submittedAt": "2026-02-27T21:09:00.000Z"
+  },
+  {
+    "id": "fa090c87-b289-4bff-9374-6304cf408061",
+    "fullname": "Aryan Gupta",
+    "email": "h@h.com",
+    "ageGroup": "25-34",
+    "experience": "excellent",
+    "navigation": "neutral",
+    "design": "very-appealing",
+    "features": [
+      "cart"
+    ],
+    "recommend": "probably",
+    "loadSpeedRating": "6",
+    "lastVisitDate": "2026-03-03",
+    "tasksCompleted": "12",
+    "comments": "",
+    "submittedAt": "2026-03-03T22:21:45.124Z"
   }
 ]
