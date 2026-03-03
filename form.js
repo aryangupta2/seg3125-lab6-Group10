@@ -163,6 +163,14 @@ if (form) {
 // Keyboard navigation + close behavior for Walmart image zoom overlays
 const zoomOverlays = Array.from(document.querySelectorAll(".zoom-overlay"));
 let activeZoomIndex = -1;
+const totalZoomImages = zoomOverlays.length;
+
+zoomOverlays.forEach((overlay, index) => {
+  const counter = document.createElement("p");
+  counter.className = "zoom-counter";
+  counter.textContent = `${index + 1} / ${totalZoomImages}`;
+  overlay.append(counter);
+});
 
 const setActiveZoom = (index) => {
   zoomOverlays.forEach((overlay, overlayIndex) => {
