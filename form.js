@@ -93,6 +93,17 @@ if (form) {
   updateStepState();
   updateLoadSpeedValue();
 
+  // Set max date to today for the last visit date input to prevent future dates
+  const lastVisitInput = document.getElementById("last-visit");
+  if (lastVisitInput) {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const todayString = `${year}-${month}-${day}`;
+    lastVisitInput.setAttribute("max", todayString);
+  }
+
   if (loadSpeedInput) {
     loadSpeedInput.addEventListener("input", updateLoadSpeedValue);
   }
