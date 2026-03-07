@@ -17,18 +17,6 @@ https://github.com/aryangupta2/seg3125-lab6-Group10
 - Node.js 18 or newer
 - npm (comes with Node.js)
 
-## Dependencies
-
-Install project dependencies with:
-
-```bash
-npm install
-```
-
-This project currently uses:
-
-- `express` (`^5.2.1`)
-
 ## Getting the Project Running
 
 1. Clone the repository.
